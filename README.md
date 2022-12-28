@@ -2,6 +2,14 @@
 
 This is the code for the [Timestamp Microservice project at freecodecamp.org](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/timestamp-microservice). 
 
+## Steps to run the code
+1. First copy file `.env.example` and rename it into `.env`, and fill the `PORT=` with intended port where the api  will listen to, for example `PORT=8080`.
+2. Open terminal, and navigate to the directory where this code is located, and run `npm install`.
+3. After finished installing dependencies, run `npm start`.
+4. To test the api, you can use browser or [Postman](https://www.postman.com/downloads/). To send `GET` request on the browser, if the api is listening on `http://localhost:8080`, type `http://localhost:8080/api/2015-12-25` and the api will give the response in `JSON` format.
+5. To stop the api, type `Ctrl+C` in the terminal.
+
+## API Description
 This Timestamp Microservice handle API Endpoint at `/api/:date?`, the cases are:
 1. If there is a `GET` request at `/api/2015-12-25`, the response is :
 ```JSON

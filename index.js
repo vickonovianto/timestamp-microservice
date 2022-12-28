@@ -28,20 +28,30 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?", (req, res) => {
   const apiParam = req.params.date;
+  // check if apiParam is exist or not
   if (apiParam !== undefined) {
+    // assume the apiParam is date string and try make Date from it
     const dateFromString = new Date(apiParam);
     if (dateFromString != 'Invalid Date') {
+      // the param is date string and is a valid date
       res.json({ unix: dateFromString.getTime(), utc: dateFromString.toUTCString() });
     } else {
-      const millis = +apiParam;
+      /* If the Date from date string is invalid, there are
+         two possibilities, first is the date string contains invalid date,
+         second is the date string is actually time in milliseconds which is valid input
+      */
+      const millis = +apiParam; // try convert apiParam to integer to check if it is milliseconds or not
       if (Number.isNaN(millis) == false) {
+        // if it is valid integer, then the apiParam is time in milliseconds
         const dateFromMillis = new Date(millis);
         res.json({ unix: dateFromMillis.getTime(), utc: dateFromMillis.toUTCString() });
       } else {
+        // if the apiParam is not integer, then the input is invalid date string
       	res.json({ error: 'Invalid Date'});
       }
     }
   } else {
+    // if the apiParam is undefined, return the current date
     const now = new Date();
     res.json({ unix: now.getTime(), utc: now.toUTCString() });
   }
